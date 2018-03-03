@@ -5,10 +5,35 @@
  */
 package javasaxparser;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author taylo
+ * @author taylor
  */
 public class XMLElement {
+    
+    private ArrayList<String> attributes;
+    private String qName;
+    
+    public XMLElement() {
+        attributes = new ArrayList<>();
+    }
+    
+    public void setQName(String qName) {
+        this.qName = qName;
+    }
+    
+    public String getQName() {
+        return qName;
+    }
+    
+    public ArrayList<String> getAttributes() {
+        return attributes;
+    }
+    
+    public void addAttribute(String attribute) {
+        attributes.add(attribute);
+    }
     
 }

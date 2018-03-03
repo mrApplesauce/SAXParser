@@ -7,6 +7,7 @@ package javasaxparser;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import javafx.stage.FileChooser;
 
 /**
  *
- * @author taylo
+ * @author taylor
  */
 public class FXMLDocumentController implements Initializable {
     
@@ -35,10 +36,17 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showOpenDialog(textArea.getScene().getWindow());
         if (file != null) {
             try {
-                System.out.println("Successfully opened");
-                //print the contents of the XML file to the text area
+                ArrayList<XMLElement> dom = XMLLoader.load(file);
+                
+                for (int i = 0; i < dom.size(); i++) {
+                    textArea.appendText(dom.get(i).getQName() + "\n");
+                    for (int j = 0; j < dom.get(i).getAttributes().size(); j++) {
+                        textArea.appendText("\t" + dom.get(i).getAttributes().get(j) + "\n");
+                    }
+                    textArea.appendText("-------------------------\n");
+                }
             } catch (Exception ex) {
-                //display exception alert
+                System.out.println("Successfully detected error.");
             }
         }
     }
